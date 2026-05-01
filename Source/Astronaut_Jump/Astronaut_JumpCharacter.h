@@ -44,6 +44,7 @@ class AAstronaut_JumpCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 	
+	// Jetpack Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JetpackAction;
 
@@ -66,17 +67,17 @@ protected:
 	
 	void ResetJetpackCooldown();
 	
-	bool bHasJetpack = false;
+	bool bHasJetpack = false; // Bool for if they have jetpack
 	
-	float JetpackDuration = 3.f;
+	float JetpackDuration = 3.f; // Time the jetpack works for
 	
-	FTimerHandle JetpackTimerHandle;
+	FTimerHandle JetpackTimerHandle; // Timer for jetpack
 	
-	bool bJetpackCooldown = false;
+	bool bJetpackCooldown = false; // Bool for if jetpack is on cooldown
 	
-	float JetpackCooldownTime = 1.f;
+	float JetpackCooldownTime = 1.f; // Time for cooldown
 	
-	FTimerHandle JetpackCooldownHandle;
+	FTimerHandle JetpackCooldownHandle; // Timer for cooldown
 
 protected:
 
