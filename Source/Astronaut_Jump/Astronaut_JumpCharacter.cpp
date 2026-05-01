@@ -135,20 +135,19 @@ void AAstronaut_JumpCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AAstronaut_JumpCharacter::AttachJetpack(AJetpack* Jetpack)
+void AAstronaut_JumpCharacter::AttachJetpack(AJetpack* Jetpack) //Attaches Jetpack
 {
 	Jetpack->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("JetpackSocket"));
 	bHasJetpack = true;
 }
 
-void AAstronaut_JumpCharacter::StartJetpack()
+void AAstronaut_JumpCharacter::StartJetpack() // Starts jetpack and makes them stay in the air
 {
 	
 	if (!bHasJetpack) return;
 	if (bJetpackCooldown) return;
 	
 	bIsJetpacking = true;
-	JetpackHeight = GetActorLocation().Z;
 
 	GetCharacterMovement()->GravityScale = 0.f;
 
@@ -159,7 +158,7 @@ void AAstronaut_JumpCharacter::StartJetpack()
 	GetWorldTimerManager().SetTimer(JetpackTimerHandle, this, &AAstronaut_JumpCharacter::StopJetpack, JetpackDuration , false);
 }
 
-void AAstronaut_JumpCharacter::StopJetpack()
+void AAstronaut_JumpCharacter::StopJetpack() // Stops jetpack and makes them fall
 {
 	if (!bHasJetpack) return;
 	bIsJetpacking = false;

@@ -68,8 +68,6 @@ protected:
 	
 	bool bIsJetpacking = false;
 	
-	float JetpackHeight = 0.f;
-	
 	bool bHasJetpack = false;
 	
 	float JetpackDuration = 3.f;
