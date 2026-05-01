@@ -159,14 +159,16 @@ void AAstronaut_JumpCharacter::StartJetpack() // Starts jetpack and makes them s
 void AAstronaut_JumpCharacter::StopJetpack() // Stops jetpack and makes them fall
 {
 	if (!bHasJetpack) return;
+	if (bJetpackCooldown) return;
+	
 
-	GetCharacterMovement()->GravityScale = 1.f;
+	GetCharacterMovement()->GravityScale = 1.75f;
 	
 	GetWorldTimerManager().ClearTimer(JetpackTimerHandle);
 	
 	bJetpackCooldown = true;
 	
-	GetWorldTimerManager().SetTimer(JetpackCooldownHandle, this, &AAstronaut_JumpCharacter::ResetJetpackCooldown, JetpackDuration , false);
+	GetWorldTimerManager().SetTimer(JetpackCooldownHandle, this, &AAstronaut_JumpCharacter::ResetJetpackCooldown, JetpackCooldownTime , false);
 }
 
 

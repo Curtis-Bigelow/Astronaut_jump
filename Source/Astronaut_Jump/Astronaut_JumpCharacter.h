@@ -75,7 +75,7 @@ protected:
 	
 	bool bJetpackCooldown = false; // Bool for if jetpack is on cooldown
 	
-	float JetpackCooldownTime = 1.f; // Time for cooldown
+	float JetpackCooldownTime = 1.f; // Time for cooldowns
 	
 	FTimerHandle JetpackCooldownHandle; // Timer for cooldown
 
