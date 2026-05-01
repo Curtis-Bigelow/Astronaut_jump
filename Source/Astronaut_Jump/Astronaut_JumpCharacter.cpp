@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Astronaut_JumpCharacter.h"
+#include "TimerManager.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -144,6 +145,7 @@ void AAstronaut_JumpCharacter::StartJetpack()
 {
 	
 	if (!bHasJetpack) return;
+	if (bJetpackCooldown) return;
 	
 	bIsJetpacking = true;
 	JetpackHeight = GetActorLocation().Z;
@@ -153,6 +155,8 @@ void AAstronaut_JumpCharacter::StartJetpack()
 	FVector Velocity = GetCharacterMovement()->Velocity;
 	Velocity.Z = 0.f;
 	GetCharacterMovement()->Velocity = Velocity;
+	
+	GetWorldTimerManager().SetTimer(JetpackTimerHandle, this, &AAstronaut_JumpCharacter::StopJetpack, JetpackDuration , false);
 }
 
 void AAstronaut_JumpCharacter::StopJetpack()
@@ -161,6 +165,12 @@ void AAstronaut_JumpCharacter::StopJetpack()
 	bIsJetpacking = false;
 
 	GetCharacterMovement()->GravityScale = 1.f;
+	
+	GetWorldTimerManager().ClearTimer(JetpackTimerHandle);
+	
+	bJetpackCooldown = true;
+	
+	GetWorldTimerManager().SetTimer(JetpackCooldownHandle, this, &AAstronaut_JumpCharacter::ResetJetpackCooldown, JetpackDuration , false);
 }
 
 void AAstronaut_JumpCharacter::Tick(float DeltaTime)
@@ -173,4 +183,10 @@ void AAstronaut_JumpCharacter::Tick(float DeltaTime)
 		Location.Z = JetpackHeight;
 		SetActorLocation(Location);
 	}
+}
+
+void AAstronaut_JumpCharacter::ResetJetpackCooldown()
+{
+	bJetpackCooldown = false;
+	GetWorldTimerManager().ClearTimer(JetpackCooldownHandle);
 }

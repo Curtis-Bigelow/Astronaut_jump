@@ -47,6 +47,7 @@ class AAstronaut_JumpCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JetpackAction;
 
+
 public:
 	AAstronaut_JumpCharacter();
 	
@@ -63,14 +64,23 @@ protected:
 	
 	void StopJetpack();
 	
+	void ResetJetpackCooldown();
+	
 	bool bIsJetpacking = false;
 	
 	float JetpackHeight = 0.f;
 	
 	bool bHasJetpack = false;
 	
+	float JetpackDuration = 3.f;
 	
-			
+	FTimerHandle JetpackTimerHandle;
+	
+	bool bJetpackCooldown = false;
+	
+	float JetpackCooldownTime = 1.f;
+	
+	FTimerHandle JetpackCooldownHandle;
 
 protected:
 
