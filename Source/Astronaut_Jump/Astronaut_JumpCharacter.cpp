@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Jetpack.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -126,4 +127,9 @@ void AAstronaut_JumpCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AAstronaut_JumpCharacter::AttachJetpack(AJetpack* Jetpack)
+{
+	Jetpack->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("JetpackSocket"));
 }
