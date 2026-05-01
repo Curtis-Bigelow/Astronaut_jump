@@ -27,7 +27,7 @@ void AJetpack::Tick(float DeltaTime)
 
 }
 
-void AJetpack::OnJetpackBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
+void AJetpack::OnJetpackBeginOverlap(AActor* OverlappedActor, AActor* OtherActor) // Overlap with player to call AttachJetpack
 {
 	auto character = Cast<AAstronaut_JumpCharacter>(OtherActor);
 	if (character != nullptr)

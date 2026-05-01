@@ -22,13 +22,13 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	void OnJetpackBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	void OnJetpackBeginOverlap(AActor* OverlappedActor, AActor* OtherActor); // Function for when overlapping with player
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) // Property for the player
 	class AAstronaut_JumpCharacter* Holder = nullptr;
 
 };
