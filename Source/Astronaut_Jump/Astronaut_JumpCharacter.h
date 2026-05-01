@@ -47,6 +47,8 @@ class AAstronaut_JumpCharacter : public ACharacter
 	// Jetpack Input Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JetpackAction;
+	
+	
 
 
 public:
@@ -54,6 +56,8 @@ public:
 	
 
 protected:
+	
+	
 
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);

@@ -16,6 +16,8 @@ class ASTRONAUT_JUMP_API AJetpack : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AJetpack();
+	
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,12 +25,15 @@ protected:
 	
 	UFUNCTION()
 	void OnJetpackBeginOverlap(AActor* OverlappedActor, AActor* OtherActor); // Function for when overlapping with player
+	
+	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) // Property for the player
+	UPROPERTY(VisibleAnywhere) // Property for the player
 	class AAstronaut_JumpCharacter* Holder = nullptr;
-
+	
+	
 };
