@@ -19,6 +19,8 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AAstronaut_JumpCharacter::AAstronaut_JumpCharacter()
 {
+	
+	PrimaryActorTick.bCanEverTick = true;
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 		
@@ -86,6 +88,9 @@ void AAstronaut_JumpCharacter::SetupPlayerInputComponent(UInputComponent* Player
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAstronaut_JumpCharacter::Look);
+		
+		EnhancedInputComponent->BindAction(JetpackAction, ETriggerEvent::Started, this, &AAstronaut_JumpCharacter::StartJetpack);
+		EnhancedInputComponent->BindAction(JetpackAction, ETriggerEvent::Completed, this, &AAstronaut_JumpCharacter::StopJetpack);
 	}
 	else
 	{
@@ -132,4 +137,35 @@ void AAstronaut_JumpCharacter::Look(const FInputActionValue& Value)
 void AAstronaut_JumpCharacter::AttachJetpack(AJetpack* Jetpack)
 {
 	Jetpack->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("JetpackSocket"));
+}
+
+void AAstronaut_JumpCharacter::StartJetpack()
+{
+	bIsJetpacking = true;
+	JetpackHeight = GetActorLocation().Z;
+
+	GetCharacterMovement()->GravityScale = 0.f;
+
+	FVector Velocity = GetCharacterMovement()->Velocity;
+	Velocity.Z = 0.f;
+	GetCharacterMovement()->Velocity = Velocity;
+}
+
+void AAstronaut_JumpCharacter::StopJetpack()
+{
+	bIsJetpacking = false;
+
+	GetCharacterMovement()->GravityScale = 1.f;
+}
+
+void AAstronaut_JumpCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (bIsJetpacking)
+	{
+		FVector Location = GetActorLocation();
+		Location.Z = JetpackHeight;
+		SetActorLocation(Location);
+	}
 }

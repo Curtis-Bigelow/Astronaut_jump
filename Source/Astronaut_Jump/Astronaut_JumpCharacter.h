@@ -43,6 +43,9 @@ class AAstronaut_JumpCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* JetpackAction;
 
 public:
 	AAstronaut_JumpCharacter();
@@ -55,6 +58,14 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	
+	void StartJetpack();
+	
+	void StopJetpack();
+	
+	bool bIsJetpacking = false;
+	
+	float JetpackHeight = 0.f;
 	
 	
 			
@@ -73,5 +84,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void AttachJetpack(AJetpack* Jetpack);
+	
+	virtual void Tick(float DeltaTime) override;
 };
 
