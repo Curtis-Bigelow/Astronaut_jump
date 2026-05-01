@@ -66,8 +66,6 @@ protected:
 	
 	void ResetJetpackCooldown();
 	
-	bool bIsJetpacking = false;
-	
 	bool bHasJetpack = false;
 	
 	float JetpackDuration = 3.f;

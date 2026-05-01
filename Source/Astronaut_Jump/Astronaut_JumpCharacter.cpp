@@ -146,8 +146,6 @@ void AAstronaut_JumpCharacter::StartJetpack() // Starts jetpack and makes them s
 	
 	if (!bHasJetpack) return;
 	if (bJetpackCooldown) return;
-	
-	bIsJetpacking = true;
 
 	GetCharacterMovement()->GravityScale = 0.f;
 
@@ -161,7 +159,6 @@ void AAstronaut_JumpCharacter::StartJetpack() // Starts jetpack and makes them s
 void AAstronaut_JumpCharacter::StopJetpack() // Stops jetpack and makes them fall
 {
 	if (!bHasJetpack) return;
-	bIsJetpacking = false;
 
 	GetCharacterMovement()->GravityScale = 1.f;
 	
