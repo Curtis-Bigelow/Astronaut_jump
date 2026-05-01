@@ -67,6 +67,8 @@ protected:
 	
 	float JetpackHeight = 0.f;
 	
+	bool bHasJetpack = false;
+	
 	
 			
 

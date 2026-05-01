@@ -137,10 +137,14 @@ void AAstronaut_JumpCharacter::Look(const FInputActionValue& Value)
 void AAstronaut_JumpCharacter::AttachJetpack(AJetpack* Jetpack)
 {
 	Jetpack->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, FName("JetpackSocket"));
+	bHasJetpack = true;
 }
 
 void AAstronaut_JumpCharacter::StartJetpack()
 {
+	
+	if (!bHasJetpack) return;
+	
 	bIsJetpacking = true;
 	JetpackHeight = GetActorLocation().Z;
 
@@ -153,6 +157,7 @@ void AAstronaut_JumpCharacter::StartJetpack()
 
 void AAstronaut_JumpCharacter::StopJetpack()
 {
+	if (!bHasJetpack) return;
 	bIsJetpacking = false;
 
 	GetCharacterMovement()->GravityScale = 1.f;
