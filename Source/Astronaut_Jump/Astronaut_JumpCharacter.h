@@ -69,7 +69,7 @@ protected:
 	
 	bool bHasJetpack = false; // Bool for if they have jetpack
 	
-	float JetpackDuration = 3.f; // Time the jetpack works for
+	float JetpackDuration = 2.f; // Time the jetpack works for
 	
 	FTimerHandle JetpackTimerHandle; // Timer for jetpack
 	
