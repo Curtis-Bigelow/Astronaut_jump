@@ -97,6 +97,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AttachJetpack(AJetpack* Jetpack);
 	
-	virtual void Tick(float DeltaTime) override;
 };
 

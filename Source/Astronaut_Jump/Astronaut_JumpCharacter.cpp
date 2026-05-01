@@ -173,19 +173,9 @@ void AAstronaut_JumpCharacter::StopJetpack()
 	GetWorldTimerManager().SetTimer(JetpackCooldownHandle, this, &AAstronaut_JumpCharacter::ResetJetpackCooldown, JetpackDuration , false);
 }
 
-void AAstronaut_JumpCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
-	if (bIsJetpacking)
-	{
-		FVector Location = GetActorLocation();
-		Location.Z = JetpackHeight;
-		SetActorLocation(Location);
-	}
-}
 
-void AAstronaut_JumpCharacter::ResetJetpackCooldown()
+void AAstronaut_JumpCharacter::ResetJetpackCooldown() // code to rest cooldown and timer for cooldown
 {
 	bJetpackCooldown = false;
 	GetWorldTimerManager().ClearTimer(JetpackCooldownHandle);
